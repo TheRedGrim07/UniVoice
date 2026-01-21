@@ -5,3 +5,6 @@ Flask-Login
 Authlib
 requests
 psycopg2-binary
+
+Authlib
+requests

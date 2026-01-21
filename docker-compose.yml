@@ -8,15 +8,19 @@ services:
       - "5000:5000"
     volumes:
       - .:/app
+
+    # 👇 ADD THIS LINE HERE
+    env_file:
+      - .env
+
     environment:
       - DATABASE_URL=postgresql://hello_hostel:secure_pass@db:5432/hostel_db
       - FLASK_APP=app
       - FLASK_DEBUG=1
-      # Good job adding this! It is required for testing OAuth on localhost (HTTP)
       - OAUTHLIB_INSECURE_TRANSPORT=1
-      # --- MOVE KEYS HERE (Under 'web') ---
-      - GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+
     depends_on:
       - db
 
@@ -28,7 +32,6 @@ services:
       - POSTGRES_USER=hello_hostel
       - POSTGRES_PASSWORD=secure_pass
       - POSTGRES_DB=hostel_db
-      
 
 volumes:
   postgres_data:
